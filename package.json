@@ -1,0 +1,47 @@
+{
+  "name": "front-end-starter",
+  "version": "0.0.1",
+  "description": "Front End Starter",
+  "repository": "https://bitbucket.org/nailliK/front-end-starter",
+  "author": "Killian Louis Grant",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^6.6.1",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.11",
+    "http-server": "^0.9.0",
+    "node-sass": "^4.1.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "reactify": "^1.1.1",
+    "redux": "^3.6.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vue": "^2.1.8",
+    "vue-router": "^2.1.1",
+    "vueify": "^9.4.0",
+    "vueify-insert-css": "^1.0.0",
+    "vuex": "^2.1.1"
+  },
+  "engines": {
+    "node": "latest"
+  },
+  "scripts": {
+    "server-local": "NODE_ENV=local ./node_modules/http-server/bin/http-server ./public/",
+    "server-prod": "NODE_ENV=production ./node_modules/http-server/bin/http-server ./public",
+    "gulp-build-vue": "gulp build-vue",
+    "gulp-watch-vue": "gulp build-vue && gulp watch-vue",
+    "gulp-build-react": "gulp build-react",
+    "gulp-watch-react": "gulp build-react && gulp watch-react"
+  }
+}

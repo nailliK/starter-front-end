@@ -1,0 +1,87 @@
+$total_cols : nth(nth($grid__breakpoints, length($grid__breakpoints)), 2);
+
+* {
+	box-sizing: border-box;
+}
+
+@function parseInt($n) {
+	@return $n / ($n * 0 + 1);
+}
+
+@mixin container {
+	display: flex;
+	flex: 0 1 auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	$break : nth($grid__breakpoints, length($grid__breakpoints));
+	$break : nth($break, 2) * $grid__column-width;
+
+	@if $grid__type == magic {
+		max-width: #{$break};
+	} @else if $grid__type == fluid {
+		max-width: 100%;
+	} @else if $grid__type == static {
+		@for $i from 1 through length($grid__breakpoints) {
+			$break : nth($grid__breakpoints, $i);
+			$total_cols : nth($break, 2);
+			@media only screen and (min-width: $total_cols * parseInt($grid__column-width) * $base__font-size) {
+				max-width: $total_cols * $grid__column-width;
+			}
+		}
+	}
+}
+
+@mixin breakpoint ($n) {
+	@for $i from 1 through length($grid__breakpoints) {
+		$break : nth($grid__breakpoints, $i);
+		@if nth($break, 1) == $n {
+			$total_cols : nth($break, 2) !global;
+		}
+	}
+
+	@media only screen and (min-width: $total_cols * parseInt($grid__column-width) * $base__font-size) {
+		@content;
+	}
+}
+
+@mixin cols ($cols:false, $reference:$total_cols) {
+	@if ($grid__padding != false) {
+		padding-left: $grid__padding;
+		padding-right: $grid__padding;
+	}
+
+	@if ($cols == false) {
+		// each element will try to take up as much space as possible on the same line
+		// no gutter will be applied.
+		flex:1;
+	} @else {
+		flex: 0 0 auto;
+
+		// assign widths
+		@if ($grid__gutter != false) {
+			flex-basis: calc((#{$cols} / #{$reference} * 100%) - #{$grid__gutter} + (#{$cols} / #{$reference} * #{$grid__gutter}));
+			max-width: calc((#{$cols} / #{$reference} * 100%) - #{$grid__gutter} + (#{$cols} / #{$reference} * #{$grid__gutter}));
+		} @else {
+			flex-basis: calc(#{$cols} / #{$reference} * 100%);
+			max-width: calc(#{$cols} / #{$reference} * 100%);
+		}
+	}
+}
+
+@mixin pre($cols, $reference:$total_cols) {
+	@if ($grid__gutter != false) {
+		margin-left: calc((#{$cols} / #{$reference} * 100%) + (#{$cols} / #{$reference} * #{$grid__gutter}));
+	} @else {
+		margin-left: calc(#{$cols} / #{$reference} * 100%);
+	}
+}
+
+@mixin post($cols, $reference:$total_cols) {
+	@if ($grid__gutter != false) {
+		margin-right: calc((#{$cols} / #{$reference} * 100%) + (#{$cols} / #{$reference} * #{$grid__gutter}));
+	} @else {
+		margin-right: calc(#{$cols} / #{$reference} * 100%);
+	}
+}

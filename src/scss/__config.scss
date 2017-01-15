@@ -1,0 +1,30 @@
+/*=====     Grid Defaults     =====*/
+
+// base measurements
+$base__ratio: 1.5;
+$base__font-size: 1rem;
+$base__line-height: $base__font-size * $base__ratio;
+
+// column measurements
+$grid__column-width: 5rem; // 5rem = exactly 960px at desktop breakpoint
+$grid__type: fluid; // static, fluid or magic
+$grid__gutter: $base__line-height; // value or false
+$grid__padding: false; // value or false
+
+// responsive breakpoints
+$grid__breakpoints: (
+	mobile 4,
+	tablet 8,
+	desktop 12
+);
+
+/*=====     Global Defaults     =====*/
+
+// colors
+$color__white: #FFFFFF;
+$color__black: #000000;
+$color__blue: #0000FF;
+
+// fonts
+$font__secondary: serif;
+$font__primary: sans-serif;

@@ -1,0 +1,74 @@
+﻿/*=====     MIXINS     =====*/
+
+// Vertical align anything (works in IE9+) (http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/)
+
+// Usage: @include vertical-align-parent;
+@mixin vertical-align-parent {
+	@include transform-style(preserve-3d);
+}
+
+// Usage: @include vertical-align;
+@mixin vertical-align {
+	@include transform(translateY(-50%));
+	position: relative;
+	top: 50%;
+}
+
+// Truncate long strings of text with an ellipsis
+//
+// Usage: supply a width as paramter:
+// ex: @include truncate-ellipsis(8rem);
+// ex: @include truncate-ellipsis(100%);
+//
+// Note: this element must be a block element
+// ex: (display: inline-block || display: block)
+@mixin truncate-ellipsis($width) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: $width;
+	white-space: nowrap;
+}
+
+// Vertical Rhythm
+
+@mixin font-size($n, $mt, $mb) {
+	font-size: $base__font-size * $n;
+
+	@if($n < 1) {
+		$n: 1;
+	}
+	line-height: floor($n) * $base__line-height;
+	margin-top: $mt * $base__line-height;
+	margin-bottom: $mb * $base__line-height;
+}
+
+// Aspect Ratio
+// @include aspect-ratio(16, 9);
+@mixin aspect-ratio-parent($width, $height) {
+  position: relative;
+
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+}
+
+@mixin aspect-ratio-child {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+// transitions for fade-in or fade-out
+@mixin transition-fade ($property) {
+	transition: $property 0.25s linear;
+}
+
+// transitions for animations
+@mixin transition-movement ($property) {
+	transition: $property 0.5s linear;
+}
