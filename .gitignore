@@ -6,6 +6,3 @@ log/
 npm-debug.log
 .idea
 yarn.lock
-public/
-!public/favicon.ico
-!public/index.html
