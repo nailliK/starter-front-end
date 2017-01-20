@@ -2,6 +2,18 @@
 
 Created By Killian Grant
 
+## DEVELOPMENT
+
+### Front End Compilation Tasks
+
+* `npm run gulp-watch-react`
+* `npm run gulp-build-react`
+
+### Starting http-server
+
+* `npm run server-local`
+* `npm run server-prod`
+
 ## REMMY
 
 ### Breakpoints
@@ -14,5 +26,5 @@ Breakpoints should be applied to override (cascade) any elements styles at speci
 ### The Grid
 * @ include container: houses groups of columns. should be applied to grouped content. Flexbox vertical alignment properties may be applied to containers without ill effects.
 * @ include cols($columns, $context): determines the width of each element.
-	* $columns is the number of columns the element should span out of the number of columns available (via $context or breakpoint).
-	* If $context is provided, it overrides the default number of columns available from the breakpoint.
+  * $columns is the number of columns the element should span out of the number of columns available (via $context or breakpoint).
+  * If $context is provided, it overrides the default number of columns available from the breakpoint.
