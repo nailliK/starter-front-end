@@ -1,13 +1,24 @@
 # Front-End Project Starter
 
-Created By Killian Grant
+Created By:
+* Killian Grant
+
+Contributors:
+* Scott Kisloski
 
 ## DEVELOPMENT
 
 ### Front End Compilation Tasks
 
+React:
+
 * `npm run gulp-watch-react`
 * `npm run gulp-build-react`
+
+Vue:
+
+* `npm run gulp-watch-vue`
+* `npm run gulp-build-vue`
 
 ### Starting http-server
 
