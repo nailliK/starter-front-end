@@ -1,6 +1,6 @@
 <style lang="scss">
 	/* all necessary mixins, frameworks and variables */
-	@import 'includes';
+	// @import 'includes';
 </style>
 
 <template>

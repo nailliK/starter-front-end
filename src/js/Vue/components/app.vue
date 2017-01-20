@@ -3,6 +3,8 @@
 	@import 'includes';
 
 	/* Global styles (only include this up in app.vue) */
+	@import '_reset';
+	@import 'font-awesome/_font-awesome';
 	@import 'global';
 </style>
 

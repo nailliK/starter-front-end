@@ -1,6 +1,13 @@
 // force production for builds
 // process.env.NODE_ENV = 'production';
 
+// add CSS file
+const link = document.createElement("link");
+link.href = "/css/main.css";
+link.type = "text/css";
+link.rel = "stylesheet";
+link.media = "screen";
+document.getElementsByTagName("head")[0].appendChild(link);
 // add <app> element
 var app = document.createElement('app');
 document.body.appendChild(app);
@@ -8,15 +15,12 @@ document.body.appendChild(app);
 var routerView = app.appendChild(document.createElement('router-view'));
 
 // dependencies
-const Vue = require('vue');
-const VueRouter = require('vue-router');
-const Vuex = require('vuex');
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
-
-// global variables
-window.base__lineHeight = (60.75 / 2);
 
 // global store
 window.store = new Vuex.Store({
@@ -26,9 +30,9 @@ window.store = new Vuex.Store({
 });
 
 // components
-const App = require('./components/app.vue');
-const Home = require('./components/home.vue');
-const Foo = require('./components/foo.vue');
+import App from './components/app.vue';
+import Home from './components/home.vue';
+import Foo from './components/foo.vue';
 
 // router
 const routes = [

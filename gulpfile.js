@@ -105,6 +105,9 @@ gulp.task('vue', function () {
 				},
 				postcss: [autoprefixer]
 			})
+			.plugin('vueify/plugins/extract-css', {
+				out: buildDir + 'css/main.css'
+			})
 			.bundle()
 			.pipe(source('main.js'))
 			.pipe(buffer())
