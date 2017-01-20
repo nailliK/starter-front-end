@@ -53,6 +53,14 @@ gulp.task('fonts', function () {
 		.pipe(livereload());
 });
 
+gulp.task('json', function () {
+	'use strict';
+
+	return gulp.src(sourceDir + 'json/**/*')
+		.pipe(gulp.dest(buildDir + 'json'))
+		.pipe(livereload());
+});
+
 gulp.task('scss', function() {
 	return gulp.src(sourceDir + 'scss/**/*.scss')
     	.pipe(scss({outputStyle: 'compressed'}).on('error', scss.logError))
@@ -63,7 +71,7 @@ gulp.task('scss', function() {
 /////     VUE     /////
 
 // Single-use Vue Gulp build task
-gulp.task('build-vue', ['fonts', 'js-vue', 'img', 'svg']);
+gulp.task('build-vue', ['fonts', 'js-vue', 'img', 'svg', 'json']);
 
 // Watch Vue build task
 gulp.task('watch-vue', function () {
@@ -81,6 +89,9 @@ gulp.task('watch-vue', function () {
 
 	// move fonts
 	gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
+
+	// move JSON
+	gulp.watch(sourceDir + 'json/**/*', ['json']);
 
 	// optimize and move images
 	gulp.watch(sourceDir + 'images/**/*', ['img']);
@@ -132,7 +143,7 @@ gulp.task('js-vue', ['vue'], function() {
 /////     REACT     /////
 
 // Single-use React Gulp build task
-gulp.task('build-react', ['fonts', 'js-react', 'scss', 'img', 'svg']);
+gulp.task('build-react', ['fonts', 'js-react', 'scss', 'img', 'json', 'svg']);
 
 // Watch Vue build task
 gulp.task('watch-react', function () {
@@ -150,6 +161,9 @@ gulp.task('watch-react', function () {
 
 	// move fonts
 	gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
+
+	// move JSON
+	gulp.watch(sourceDir + 'json/**/*', ['json']);
 
 	// optimize and move images
 	gulp.watch(sourceDir + 'images/**/*', ['img']);

@@ -9,10 +9,10 @@ link.rel = "stylesheet";
 link.media = "screen";
 document.getElementsByTagName("head")[0].appendChild(link);
 // add <app> element
-var app = document.createElement('app');
+const app = document.createElement('app');
 document.body.appendChild(app);
 // add <router-view> element
-var routerView = app.appendChild(document.createElement('router-view'));
+const routerView = app.appendChild(document.createElement('router-view'));
 
 // dependencies
 import Vue from 'vue';
@@ -37,8 +37,8 @@ import Foo from './components/foo.vue';
 // router
 const routes = [
 	{ path: '/', component: Home },
-	{ path: '/foo', redirect: 'foo/0' },
-	{ path: '/foo/:id', component: Foo },
+	{ path: '/todos', component: Home },
+	{ path: '/todos/:id', component: Foo },
 ];
 
 const router = new VueRouter({
@@ -47,7 +47,7 @@ const router = new VueRouter({
 })
 
 new Vue({
-	router: router,
+	router,
 	el: 'app',
 	render: h => h(App)
 });
