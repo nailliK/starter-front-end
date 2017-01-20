@@ -1,9 +1,11 @@
 # Front-End Project Starter
 
 Created By:
+
 * Killian Grant
 
 Contributors:
+
 * Scott Kisloski
 
 ## DEVELOPMENT
