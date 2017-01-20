@@ -19,6 +19,18 @@ const store = createStore(
   applyMiddleware(reduxThunk)
 );
 
+// add CSS file
+const link = document.createElement('link');
+link.href = '/css/main.css';
+link.type = 'text/css';
+link.rel = 'stylesheet';
+link.media = 'screen';
+document.getElementsByTagName('head')[0].appendChild(link);
+
+// add <app> element
+var app = document.createElement('app');
+document.body.appendChild(app);
+
 // render & handle SPA routing
 const load = () => {
   ReactDOM.render(
@@ -29,7 +41,7 @@ const load = () => {
         </Route>
       </Router>
     </Provider>,
-    document.querySelector('#app')
+    document.querySelector('app')
   );
 };
 
