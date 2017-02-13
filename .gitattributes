@@ -1,0 +1,5 @@
+*.js    filter=tabspace
+*.html    filter=tabspace
+*.scss    filter=tabspace
+*.json    filter=tabspace
+*.vue    filter=tabspace
