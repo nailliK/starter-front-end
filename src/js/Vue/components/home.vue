@@ -1,7 +1,5 @@
 <style lang="scss">
     /* all necessary mixins, frameworks and variables */
-    /
-    /
     @import 'includes';
 </style>
 

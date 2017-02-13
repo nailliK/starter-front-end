@@ -1,79 +1,71 @@
 var fs = require('fs'),
-	gulp = require('gulp'),
-	watch = require('gulp-watch'),
-	source = require('vinyl-source-stream'),
-	buffer = require('vinyl-buffer'),
-	livereload = require('gulp-livereload'),
-	args = require('yargs').args,
+    gulp = require('gulp'),
+    watch = require('gulp-watch'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    livereload = require('gulp-livereload'),
+    args = require('yargs').args,
 
-	// Javascript linting and minification
-	browserify = require('browserify'),
-	uglify = require('gulp-uglify'),
-	babelify = require('babelify'),
-	autoprefixer = require('autoprefixer'),
+    // Javascript linting and minification
+    browserify = require('browserify'),
+    uglify = require('gulp-uglify'),
+    babelify = require('babelify'),
+    autoprefixer = require('autoprefixer'),
 
-	// scss
-	scss = require('gulp-sass'),
+    // scss
+    scss = require('gulp-sass'),
 
-	// Vue.js
-	vueify = require('vueify'),
+    // Vue.js
+    vueify = require('vueify'),
 
-	// React.js
-	reactify = require('reactify'),
+    // React.js
+    reactify = require('reactify'),
 
-	// ImageMin
-	imagemin = require('gulp-imagemin'),
+    // ImageMin
+    imagemin = require('gulp-imagemin'),
 
-	// directory variables
-	sourceDir = 'src/',
-	buildDir = 'public/';
+    // directory variables
+    sourceDir = 'src/',
+    buildDir = 'public/';
 
 
 /////     GLOBAL     /////
 
-gulp.task('svg', function() {
-	'use strict';
+gulp.task('svg', function () {
+    'use strict';
 
-	return gulp.src(sourceDir + 'svg/**/*')
-		.pipe(gulp.dest(buildDir + 'svg'))
-		.pipe(livereload());
+    return gulp.src(sourceDir + 'svg/**/*')
+        .pipe(gulp.dest(buildDir + 'svg'))
+        .pipe(livereload());
 });
 
-gulp.task('img', function() {
-	'use strict';
+gulp.task('img', function () {
+    'use strict';
 
-	return gulp.src(sourceDir + 'img/**/*')
-		.pipe(gulp.dest(buildDir + 'img'))
-		.pipe(livereload());
+    return gulp.src(sourceDir + 'img/**/*')
+        .pipe(gulp.dest(buildDir + 'img'))
+        .pipe(livereload());
 });
 
-gulp.task('fonts', function() {
-	return gulp.src(sourceDir + 'fonts/**/*')
-		.pipe(gulp.dest(buildDir + 'fonts/'))
-		.pipe(livereload());
+gulp.task('fonts', function () {
+    return gulp.src(sourceDir + 'fonts/**/*')
+        .pipe(gulp.dest(buildDir + 'fonts/'))
+        .pipe(livereload());
 });
 
-<<<<<<< HEAD
 gulp.task('json', function () {
-	'use strict';
-
-	return gulp.src(sourceDir + 'json/**/*')
-		.pipe(gulp.dest(buildDir + 'json'))
-=======
-gulp.task('json', function() {
-	return gulp.src(sourceDir + 'json/**/*')
-		.pipe(gulp.dest(buildDir + 'json/'))
->>>>>>> 6265df1ae1493a21bc33a0c09f7e4dd0e822dacd
-		.pipe(livereload());
+    return gulp.src(sourceDir + 'json/**/*')
+        .pipe(gulp.dest(buildDir + 'json/'))
+        .pipe(livereload());
 });
 
-gulp.task('scss', function() {
-	return gulp.src(sourceDir + 'scss/**/*.scss')
-		.pipe(scss({
-			outputStyle: 'compressed'
-		}).on('error', scss.logError))
-		.pipe(gulp.dest(buildDir + 'css'))
-		.pipe(livereload());
+gulp.task('scss', function () {
+    return gulp.src(sourceDir + 'scss/**/*.scss')
+        .pipe(scss({
+            outputStyle: 'compressed'
+        }).on('error', scss.logError))
+        .pipe(gulp.dest(buildDir + 'css'))
+        .pipe(livereload());
 });
 
 /////     VUE     /////
@@ -82,71 +74,71 @@ gulp.task('scss', function() {
 gulp.task('build-vue', ['fonts', 'js-vue', 'img', 'svg', 'json']);
 
 // Watch Vue build task
-gulp.task('watch-vue', function() {
+gulp.task('watch-vue', function () {
 
-	// start livereload
-	livereload.listen({
-		'basePath': './'
-	});
+    // start livereload
+    livereload.listen({
+        'basePath': './'
+    });
 
-	// compile SCSS and Vue Components
-	gulp.watch(sourceDir + 'scss/**/*', ['js-vue']);
+    // compile SCSS and Vue Components
+    gulp.watch(sourceDir + 'scss/**/*', ['js-vue']);
 
-	// compile js components
-	gulp.watch(sourceDir + 'js/Vue/**/*', ['js-vue']);
+    // compile js components
+    gulp.watch(sourceDir + 'js/Vue/**/*', ['js-vue']);
 
-	// move fonts
-	gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
+    // move fonts
+    gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
 
-	// move JSON
-	gulp.watch(sourceDir + 'json/**/*', ['json']);
+    // move JSON
+    gulp.watch(sourceDir + 'json/**/*', ['json']);
 
-	// optimize and move images
-	gulp.watch(sourceDir + 'images/**/*', ['img']);
+    // optimize and move images
+    gulp.watch(sourceDir + 'images/**/*', ['img']);
 
-	// optimize and move svg
-	gulp.watch(sourceDir + 'svg/**/*', ['svg']);
+    // optimize and move svg
+    gulp.watch(sourceDir + 'svg/**/*', ['svg']);
 });
 
-gulp.task('vue', function() {
-	var b = browserify({
-		entries: [sourceDir + 'js/Vue/main.js'],
-		debug: true
-	});
+gulp.task('vue', function () {
+    var b = browserify({
+        entries: [sourceDir + 'js/Vue/main.js'],
+        debug: true
+    });
 
-	var bundle = function() {
-		return b
-			.transform('babelify', {
-				presets: ['es2015']
-			})
-			.transform(vueify, {
-				sass: {
-					includePaths: [sourceDir + 'scss/'],
-					outputStyle: 'compressed'
-				},
-				postcss: [autoprefixer]
-			})
-			.plugin('vueify/plugins/extract-css', {
-				out: buildDir + 'css/main.css'
-			})
-			.bundle()
-			.pipe(source('main.js'))
-			.pipe(buffer())
-			.pipe(gulp.dest(buildDir + 'js/'));
-	};
+    var bundle = function () {
+        return b
+            .transform('babelify', {
+                presets: ['es2015']
+            })
+            .transform(vueify, {
+                sass: {
+                    includePaths: [sourceDir + 'scss/'],
+                    outputStyle: 'compressed'
+                },
+                postcss: [autoprefixer]
+            })
+            .plugin('vueify/plugins/extract-css', {
+                out: buildDir + 'css/main.css'
+            })
+            .bundle()
+            .pipe(source('main.js'))
+            .pipe(buffer())
+            .pipe(gulp.dest(buildDir + 'js/'));
+    };
 
-	return bundle();
+    return bundle();
 });
 
-gulp.task('js-vue', ['vue'], function() {
-	return gulp.src(buildDir + 'js/main.js')
-		.pipe(uglify({
-			mangle: false,
-			compress: false,
-			preserveComments: true
-		}))
-		.pipe(gulp.dest(buildDir + 'js/'))
-		.pipe(livereload());
+gulp.task('js-vue', ['vue'], function () {
+    return gulp.src(buildDir + 'js/main.js')
+        .pipe(uglify({
+            mangle: false,
+            compress: false,
+            preserveComments: true
+        }))
+        .pipe(gulp.dest(buildDir + 'js/'))
+        .pipe(livereload());
 });
 
 
@@ -156,60 +148,60 @@ gulp.task('js-vue', ['vue'], function() {
 gulp.task('build-react', ['fonts', 'js-react', 'scss', 'img', 'json', 'svg']);
 
 // Watch Vue build task
-gulp.task('watch-react', function() {
+gulp.task('watch-react', function () {
 
-	// start livereload
-	livereload.listen({
-		'basePath': './'
-	});
+    // start livereload
+    livereload.listen({
+        'basePath': './'
+    });
 
-	// compile SCSS
-	gulp.watch(sourceDir + 'scss/**/*', ['scss']);
+    // compile SCSS
+    gulp.watch(sourceDir + 'scss/**/*', ['scss']);
 
-	// compile js components
-	gulp.watch(sourceDir + 'js/React/**/*', ['js-react']);
+    // compile js components
+    gulp.watch(sourceDir + 'js/React/**/*', ['js-react']);
 
-	// move fonts
-	gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
+    // move fonts
+    gulp.watch(sourceDir + 'fonts/**/*', ['fonts']);
 
-	// move JSON
-	gulp.watch(sourceDir + 'json/**/*', ['json']);
+    // move JSON
+    gulp.watch(sourceDir + 'json/**/*', ['json']);
 
-	// optimize and move images
-	gulp.watch(sourceDir + 'images/**/*', ['img']);
+    // optimize and move images
+    gulp.watch(sourceDir + 'images/**/*', ['img']);
 
-	// optimize and move svg
-	gulp.watch(sourceDir + 'svg/**/*', ['svg']);
+    // optimize and move svg
+    gulp.watch(sourceDir + 'svg/**/*', ['svg']);
 });
 
-gulp.task('react', function() {
-	var b = browserify({
-		entries: [sourceDir + 'js/React/main.js'],
-		debug: true
-	});
+gulp.task('react', function () {
+    var b = browserify({
+        entries: [sourceDir + 'js/React/main.js'],
+        debug: true
+    });
 
-	var bundle = function() {
-		return b
-			.transform('babelify', {
-				presets: ['es2015', 'react']
-			})
-			.transform(reactify)
-			.bundle()
-			.pipe(source('main.js'))
-			.pipe(buffer())
-			.pipe(gulp.dest(buildDir + 'js/'));
-	};
+    var bundle = function () {
+        return b
+            .transform('babelify', {
+                presets: ['es2015', 'react']
+            })
+            .transform(reactify)
+            .bundle()
+            .pipe(source('main.js'))
+            .pipe(buffer())
+            .pipe(gulp.dest(buildDir + 'js/'));
+    };
 
-	return bundle();
+    return bundle();
 });
 
-gulp.task('js-react', ['react'], function() {
-	return gulp.src(buildDir + 'js/main.js')
-		.pipe(uglify({
-			mangle: false,
-			compress: false,
-			preserveComments: true
-		}))
-		.pipe(gulp.dest(buildDir + 'js/'))
-		.pipe(livereload());
+gulp.task('js-react', ['react'], function () {
+    return gulp.src(buildDir + 'js/main.js')
+        .pipe(uglify({
+            mangle: false,
+            compress: false,
+            preserveComments: true
+        }))
+        .pipe(gulp.dest(buildDir + 'js/'))
+        .pipe(livereload());
 });
