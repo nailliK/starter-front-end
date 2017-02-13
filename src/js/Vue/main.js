@@ -13,43 +13,41 @@ const app = document.createElement('app');
 document.body.appendChild(app);
 // add <router-view> element
 const routerView = app.appendChild(document.createElement('router-view'));
-
 // dependencies
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Vuex from "vuex";
+// components
+import App from "./components/app.vue";
+import Home from "./components/home.vue";
+import Foo from "./components/foo.vue";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
 // global store
 window.store = new Vuex.Store({
-	state: {
-		foo: 'bar'
-	}
+    state: {
+        foo: 'bar'
+    }
 });
-
-// components
-import App from './components/app.vue';
-import Home from './components/home.vue';
-import Foo from './components/foo.vue';
 
 // router
 const routes = [
-	{ path: '/', component: Home },
-	{ path: '/todos', component: Home },
-	{ path: '/todos/:id', component: Foo },
+    {path: '/', component: Home},
+    {path: '/todos', component: Home},
+    {path: '/todos/:id', component: Foo},
 ];
 
 const router = new VueRouter({
-	routes: routes,
-	mode: 'history'
+    routes: routes,
+    mode: 'history'
 })
 
 new Vue({
-	router,
-	el: 'app',
-	render: h => h(App)
+    router,
+    el: 'app',
+    render: h => h(App)
 });
 
 // fade in our page

@@ -1,83 +1,84 @@
 // HTML/body
 html, body {
-	color: $color__black;
-	font-family: $font__primary;
-	font-size: $base__font-size;
-	line-height: $base__line-height;
+    color: $color__black;
+    font-family: $font__primary;
+    font-size: $base__font-size;
+    line-height: $base__line-height;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: 700;
-	font-family: $font__secondary;
-	letter-spacing: 0.125;
+    font-weight: 700;
+    font-family: $font__secondary;
+    letter-spacing: 0.125;
 }
 
 // headings
 h1 {
-	@include font-size(3, 2, 2);
+    @include font-size(3, 2, 2);
 }
 
 h2 {
-	@include font-size(2, 2, 1);
-	font-weight: 400;
+    @include font-size(2, 2, 1);
+    font-weight: 400;
 }
 
 h3 {
-	@include font-size(1.5, 1, 1);
+    @include font-size(1.5, 1, 1);
 }
 
 h4 {
-	@include font-size(1, 1, 1);
+    @include font-size(1, 1, 1);
 }
 
 // paragraph
 p {
-	@include font-size(1, 1, 1);
+    @include font-size(1, 1, 1);
 }
 
 // link
 a {
-	color: $color__blue;
-	text-decoration: none;
+    color: $color__blue;
+    text-decoration: none;
 
-	&:hover {}
+    &:hover {
+    }
 }
 
 // blockquote
 blockquote {
-	margin: $base__line-height 0;
-	padding: 0 0 0 $base__line-height;
-	position: relative;
+    margin: $base__line-height 0;
+    padding: 0 0 0 $base__line-height;
+    position: relative;
 
-	&:before {
-		border-left: solid 0.125 * $base__font-size $color__black;
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-	}
+    &:before {
+        border-left: solid 0.125 * $base__font-size $color__black;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
 }
 
 // inline text elements
 strong {
-	font-weight: 700;
+    font-weight: 700;
 }
 
 em {
-	font-style: italic;
+    font-style: italic;
 }
 
 sup {
-	vertical-align: super;
-	font-size: 0.75 * $base__font-size;
+    vertical-align: super;
+    font-size: 0.75 * $base__font-size;
 }
 
 sub {
-	vertical-align: sub;
-	font-size: 0.75 * $base__font-size;
+    vertical-align: sub;
+    font-size: 0.75 * $base__font-size;
 }
 
 small {
-	font-size: 0.75 * $base__font-size;
+    font-size: 0.75 * $base__font-size;
 }
