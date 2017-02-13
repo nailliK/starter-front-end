@@ -6,32 +6,32 @@ var fs = require('fs'),
 	livereload = require('gulp-livereload'),
 	args = require('yargs').args,
 
-// Javascript linting and minification
+	// Javascript linting and minification
 	browserify = require('browserify'),
 	uglify = require('gulp-uglify'),
 	babelify = require('babelify'),
 	autoprefixer = require('autoprefixer'),
 
-// scss
+	// scss
 	scss = require('gulp-sass'),
 
-// Vue.js
+	// Vue.js
 	vueify = require('vueify'),
 
-// React.js
+	// React.js
 	reactify = require('reactify'),
 
-// ImageMin
+	// ImageMin
 	imagemin = require('gulp-imagemin'),
 
-// directory variables
+	// directory variables
 	sourceDir = 'src/',
 	buildDir = 'public/';
-	
+
 
 /////     GLOBAL     /////
 
-gulp.task('svg', function () {
+gulp.task('svg', function() {
 	'use strict';
 
 	return gulp.src(sourceDir + 'svg/**/*')
@@ -39,7 +39,7 @@ gulp.task('svg', function () {
 		.pipe(livereload());
 });
 
-gulp.task('img', function () {
+gulp.task('img', function() {
 	'use strict';
 
 	return gulp.src(sourceDir + 'img/**/*')
@@ -47,24 +47,32 @@ gulp.task('img', function () {
 		.pipe(livereload());
 });
 
-gulp.task('fonts', function () {
+gulp.task('fonts', function() {
 	return gulp.src(sourceDir + 'fonts/**/*')
 		.pipe(gulp.dest(buildDir + 'fonts/'))
 		.pipe(livereload());
 });
 
+<<<<<<< HEAD
 gulp.task('json', function () {
 	'use strict';
 
 	return gulp.src(sourceDir + 'json/**/*')
 		.pipe(gulp.dest(buildDir + 'json'))
+=======
+gulp.task('json', function() {
+	return gulp.src(sourceDir + 'json/**/*')
+		.pipe(gulp.dest(buildDir + 'json/'))
+>>>>>>> 6265df1ae1493a21bc33a0c09f7e4dd0e822dacd
 		.pipe(livereload());
 });
 
 gulp.task('scss', function() {
 	return gulp.src(sourceDir + 'scss/**/*.scss')
-    	.pipe(scss({outputStyle: 'compressed'}).on('error', scss.logError))
-    	.pipe(gulp.dest(buildDir + 'css'))
+		.pipe(scss({
+			outputStyle: 'compressed'
+		}).on('error', scss.logError))
+		.pipe(gulp.dest(buildDir + 'css'))
 		.pipe(livereload());
 });
 
@@ -74,7 +82,7 @@ gulp.task('scss', function() {
 gulp.task('build-vue', ['fonts', 'js-vue', 'img', 'svg', 'json']);
 
 // Watch Vue build task
-gulp.task('watch-vue', function () {
+gulp.task('watch-vue', function() {
 
 	// start livereload
 	livereload.listen({
@@ -100,15 +108,17 @@ gulp.task('watch-vue', function () {
 	gulp.watch(sourceDir + 'svg/**/*', ['svg']);
 });
 
-gulp.task('vue', function () {
+gulp.task('vue', function() {
 	var b = browserify({
 		entries: [sourceDir + 'js/Vue/main.js'],
 		debug: true
 	});
 
-	var bundle = function () {
+	var bundle = function() {
 		return b
-			.transform('babelify', {presets: ['es2015']})
+			.transform('babelify', {
+				presets: ['es2015']
+			})
 			.transform(vueify, {
 				sass: {
 					includePaths: [sourceDir + 'scss/'],
@@ -146,7 +156,7 @@ gulp.task('js-vue', ['vue'], function() {
 gulp.task('build-react', ['fonts', 'js-react', 'scss', 'img', 'json', 'svg']);
 
 // Watch Vue build task
-gulp.task('watch-react', function () {
+gulp.task('watch-react', function() {
 
 	// start livereload
 	livereload.listen({
@@ -178,9 +188,11 @@ gulp.task('react', function() {
 		debug: true
 	});
 
-	var bundle = function () {
+	var bundle = function() {
 		return b
-			.transform('babelify', {presets: ['es2015', 'react']})
+			.transform('babelify', {
+				presets: ['es2015', 'react']
+			})
 			.transform(reactify)
 			.bundle()
 			.pipe(source('main.js'))
